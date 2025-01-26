@@ -1,13 +1,12 @@
 from __future__ import annotations
 
-import datetime
 from collections.abc import Sequence
 from typing import Any
 
 from qtpy import QtCore, QtGui
 from pydantic import GetCoreSchemaHandler, GetJsonSchemaHandler
 from pydantic.json_schema import JsonSchemaValue
-from pydantic_core import core_schema, SchemaValidator
+from pydantic_core import core_schema
 
 
 class QAnnotation:
@@ -122,26 +121,14 @@ class QDateTime(QAnnotation):
 
 
 class QTime(QAnnotation):
-    qtype = QtCore.QDate
-    schema = core_schema.union_schema(
-        [
-            # iso time
-            core_schema.str_schema(),
-            # hour, minute, second, (milliseconds)
-            core_schema.tuple_schema(
-                [core_schema.int_schema()],
-                variadic_item_index=0,
-                min_length=3,
-                max_length=4,
-            ),
-        ]
-    )
+    qtype = QtCore.QTime
+    schema = core_schema.time_schema()
 
     @classmethod
     def validate(cls, value: Any) -> QAnnotation.qtype:
-        if isinstance(value, Sequence):
-            return cls.qtype(*value)
-        return cls.qtype.fromString(value, format=QtCore.Qt.DateFormat.ISODate)
+        return cls.qtype(
+            value.hour, value.minute, value.second, value.microsecond // 1000
+        )
 
     @staticmethod
     def serialize(value: Any) -> Any:
@@ -168,7 +155,7 @@ class QColor(QAnnotation):
             core_schema.str_schema(),
             # rgb(a)
             core_schema.tuple_schema(
-                [core_schema.int_schema()],
+                [core_schema.int_schema(ge=0, le=255)],
                 variadic_item_index=0,
                 min_length=3,
                 max_length=4,
@@ -179,12 +166,3 @@ class QColor(QAnnotation):
     @staticmethod
     def serialize(value: Any) -> Any:
         return value.getRgb()
-
-
-class QFont(QAnnotation):
-    qtype = QtGui.QFont
-    schema = core_schema.str_schema()
-
-    @staticmethod
-    def serialize(value: Any) -> Any:
-        return value.family()

@@ -14,7 +14,6 @@ from qt_pydantic import (
     QTime,
     QUuid,
     QColor,
-    QFont,
 )
 
 
@@ -187,12 +186,95 @@ def test_qdate(data: Any, expected: QtCore.QDate | None) -> None:
                 QtCore.QTimeZone((2 * 3600) + (30 * 60)),
             ),
         ),
+        (
+            '2032-04-23 10:20:30',
+            QtCore.QDateTime(QtCore.QDate(2032, 4, 23), QtCore.QTime(10, 20, 30)),
+        ),
+        (
+            '2032-04-23 10:20:30 UTC',
+            None,
+        ),
     ],
 )
 def test_qdatetime(data: Any, expected: QtCore.QDateTime | None) -> None:
 
     class Model(BaseModel):
         data: QDateTime
+
+    if expected:
+        assert Model(data=data).data == expected
+    else:
+        with pytest.raises(ValidationError):
+            assert Model(data=data).data == expected
+
+
+# QTime
+@pytest.mark.parametrize(
+    'data,expected',
+    [
+        ('04:08:16', QtCore.QTime(4, 8, 16)),
+        ([4, 8, 16], None),
+        ('4:8:16', None),
+    ],
+)
+def test_qtime(data: Any, expected: QtCore.QTime | None) -> None:
+
+    class Model(BaseModel):
+        data: QTime
+
+    if expected:
+        assert Model(data=data).data == expected
+    else:
+        with pytest.raises(ValidationError):
+            assert Model(data=data).data == expected
+
+
+# QUuid
+@pytest.mark.parametrize(
+    'data,expected',
+    [
+        (
+            '{9a619ea5-038c-42db-8845-3a33ea55887d}',
+            QtCore.QUuid('{9a619ea5-038c-42db-8845-3a33ea55887d}'),
+        ),
+        (
+            '9a619ea5-038c-42db-8845-3a33ea55887d',
+            QtCore.QUuid('{9a619ea5-038c-42db-8845-3a33ea55887d}'),
+        ),
+        (
+            '9a619ea5038c42db88453a33ea55887d',
+            QtCore.QUuid('{00000000-0000-0000-0000-000000000000}'),
+        ),
+    ],
+)
+def test_quuid(data: Any, expected: QtCore.QUuid | None) -> None:
+
+    class Model(BaseModel):
+        data: QUuid
+
+    if expected is None:
+        with pytest.raises(ValidationError):
+            assert Model(data=data).data == expected
+    else:
+        assert Model(data=data).data == expected
+
+
+# QColor
+@pytest.mark.parametrize(
+    'data,expected',
+    [
+        ([12, 55, 255], QtGui.QColor(12, 55, 255)),
+        ([0, 0, 0], QtGui.QColor(0, 0, 0)),
+        ([12, 55, 255, 23], QtGui.QColor(12, 55, 255, 23)),
+        ('red', QtGui.QColor('red')),
+        ([-120, 55, 127], None),
+        ([12, 55], None),
+    ],
+)
+def test_qcolor(data: Any, expected: QtGui.QColor | None) -> None:
+
+    class Model(BaseModel):
+        data: QColor
 
     if expected:
         assert Model(data=data).data == expected

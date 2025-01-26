@@ -10,7 +10,6 @@ from .annotations import (
     QTime,
     QUuid,
     QColor,
-    QFont,
 )
 
 __version__ = '0.0.0'
