@@ -1,4 +1,4 @@
-from .annotations import (
+from .wrapper import (
     QSize,
     QSizeF,
     QPoint,
