@@ -1,6 +1,6 @@
 [project]
 name = "qt-pydantic"
-version = "0.1.0"
+version = "0.1.1"
 description = "Pydantic BaseModel Annotations for Qt"
 authors = [
     {name = "Beat Reichenbach"}
