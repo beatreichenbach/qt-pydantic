@@ -32,6 +32,9 @@ build-backend = "setuptools.build_meta"
 [tool.setuptools.packages.find]
 include = ["qt_pydantic*"]
 
+[tool.setuptools.package-data]
+qt_pydantic = ["py.typed"]
+
 [tool.semantic_release]
 allow_zero_version = true
 version_variables = ["qt_pydantic/__init__.py:__version__"]
