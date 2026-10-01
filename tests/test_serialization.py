@@ -1,19 +1,19 @@
-from typing import Any
-from pydantic import BaseModel, ValidationError
 import pytest
+from pydantic import BaseModel
 from qtpy import QtCore, QtGui
+
 from qt_pydantic import (
-    QSize,
-    QSizeF,
+    QColor,
+    QDate,
+    QDateTime,
     QPoint,
     QPointF,
     QRect,
     QRectF,
-    QDate,
-    QDateTime,
+    QSize,
+    QSizeF,
     QTime,
     QUuid,
-    QColor,
 )
 
 
@@ -26,7 +26,7 @@ from qt_pydantic import (
         (QtCore.QSize(5, 0), '[5,0]'),
     ],
 )
-def test_qsize(data: Any, expected: QtCore.QSize | None) -> None:
+def test_qsize(data: QtCore.QSize, expected: str) -> None:
 
     class Model(BaseModel):
         data: QSize
@@ -45,7 +45,7 @@ def test_qsize(data: Any, expected: QtCore.QSize | None) -> None:
         (QtCore.QSizeF(5.1, 0.1), '[5.1,0.1]'),
     ],
 )
-def test_qsize(data: Any, expected: QtCore.QSizeF | None) -> None:
+def test_qsizef(data: QtCore.QSizeF, expected: str) -> None:
 
     class Model(BaseModel):
         data: QSizeF
@@ -64,7 +64,7 @@ def test_qsize(data: Any, expected: QtCore.QSizeF | None) -> None:
         (QtCore.QPoint(5, 0), '[5,0]'),
     ],
 )
-def test_qpoint(data: Any, expected: QtCore.QPoint | None) -> None:
+def test_qpoint(data: QtCore.QPoint, expected: str) -> None:
 
     class Model(BaseModel):
         data: QPoint
@@ -83,7 +83,7 @@ def test_qpoint(data: Any, expected: QtCore.QPoint | None) -> None:
         (QtCore.QPointF(5.1, 0.1), '[5.1,0.1]'),
     ],
 )
-def test_qpointf(data: Any, expected: QtCore.QPointF | None) -> None:
+def test_qpointf(data: QtCore.QPointF, expected: str) -> None:
 
     class Model(BaseModel):
         data: QPointF
@@ -102,7 +102,7 @@ def test_qpointf(data: Any, expected: QtCore.QPointF | None) -> None:
         (QtCore.QRect(5, 0, 2, 3), '[5,0,2,3]'),
     ],
 )
-def test_qrect(data: Any, expected: QtCore.QRect | None) -> None:
+def test_qrect(data: QtCore.QRect, expected: str) -> None:
 
     class Model(BaseModel):
         data: QRect
@@ -121,7 +121,7 @@ def test_qrect(data: Any, expected: QtCore.QRect | None) -> None:
         (QtCore.QRectF(5.1, 0.1, 0.0, -1.2), '[5.1,0.1,0.0,-1.2]'),
     ],
 )
-def test_qrectf(data: Any, expected: QtCore.QRectF | None) -> None:
+def test_qrectf(data: QtCore.QRectF, expected: str) -> None:
 
     class Model(BaseModel):
         data: QRectF
@@ -139,7 +139,7 @@ def test_qrectf(data: Any, expected: QtCore.QRectF | None) -> None:
         (QtCore.QDate(2023, 3, 24), '"2023-03-24"'),
     ],
 )
-def test_qdate(data: Any, expected: QtCore.QDate | None) -> None:
+def test_qdate(data: QtCore.QDate, expected: str) -> None:
 
     class Model(BaseModel):
         data: QDate
@@ -167,7 +167,7 @@ def test_qdate(data: Any, expected: QtCore.QDate | None) -> None:
         ),
     ],
 )
-def test_qdatetime(data: Any, expected: QtCore.QDateTime | None) -> None:
+def test_qdatetime(data: QtCore.QDateTime, expected: str) -> None:
 
     class Model(BaseModel):
         data: QDateTime
@@ -184,7 +184,7 @@ def test_qdatetime(data: Any, expected: QtCore.QDateTime | None) -> None:
         (QtCore.QTime(4, 8, 16), '"04:08:16"'),
     ],
 )
-def test_qtime(data: Any, expected: QtCore.QTime | None) -> None:
+def test_qtime(data: QtCore.QTime, expected: str) -> None:
 
     class Model(BaseModel):
         data: QTime
@@ -204,7 +204,7 @@ def test_qtime(data: Any, expected: QtCore.QTime | None) -> None:
         ),
     ],
 )
-def test_quuid(data: Any, expected: QtCore.QUuid | None) -> None:
+def test_quuid(data: QtCore.QUuid, expected: str) -> None:
 
     class Model(BaseModel):
         data: QUuid
@@ -223,7 +223,7 @@ def test_quuid(data: Any, expected: QtCore.QUuid | None) -> None:
         (QtGui.QColor(12, 55, 127, 23), '[12,55,127,23]'),
     ],
 )
-def test_qcolor(data: Any, expected: QtGui.QColor | None) -> None:
+def test_qcolor(data: QtGui.QColor, expected: str) -> None:
 
     class Model(BaseModel):
         data: QColor

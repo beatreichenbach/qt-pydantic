@@ -1,17 +1,18 @@
-from PySide6 import QtCore, QtGui
 from pydantic import BaseModel
+from PySide6 import QtCore, QtGui
+
 from qt_pydantic import (
-    QSize,
-    QSizeF,
+    QColor,
+    QDate,
+    QDateTime,
     QPoint,
     QPointF,
     QRect,
     QRectF,
-    QDate,
-    QDateTime,
+    QSize,
+    QSizeF,
     QTime,
     QUuid,
-    QColor,
 )
 
 

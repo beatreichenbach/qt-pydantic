@@ -1,19 +1,25 @@
+# ruff: noqa: ANN401
+
+from __future__ import annotations
+
 from typing import Any
-from pydantic import BaseModel, ValidationError
+
 import pytest
+from pydantic import BaseModel, ValidationError
 from qtpy import QtCore, QtGui
+
 from qt_pydantic import (
-    QSize,
-    QSizeF,
+    QColor,
+    QDate,
+    QDateTime,
     QPoint,
     QPointF,
     QRect,
     QRectF,
-    QDate,
-    QDateTime,
+    QSize,
+    QSizeF,
     QTime,
     QUuid,
-    QColor,
 )
 
 
@@ -31,7 +37,7 @@ from qt_pydantic import (
 def test_qsize(data: Any, expected: QtCore.QSize | None) -> None:
 
     class Model(BaseModel):
-        data: QSize
+        data: QSize | None
 
     if expected:
         assert Model(data=data).data == expected
@@ -53,7 +59,7 @@ def test_qsize(data: Any, expected: QtCore.QSize | None) -> None:
 def test_qsizef(data: Any, expected: QtCore.QSizeF | None) -> None:
 
     class Model(BaseModel):
-        data: QSizeF
+        data: QSizeF | None
 
     if expected:
         assert Model(data=data).data == expected
@@ -76,7 +82,7 @@ def test_qsizef(data: Any, expected: QtCore.QSizeF | None) -> None:
 def test_qpoint(data: Any, expected: QtCore.QPoint | None) -> None:
 
     class Model(BaseModel):
-        data: QPoint
+        data: QPoint | None
 
     if expected:
         assert Model(data=data).data == expected
@@ -98,7 +104,7 @@ def test_qpoint(data: Any, expected: QtCore.QPoint | None) -> None:
 def test_qpointf(data: Any, expected: QtCore.QPointF | None) -> None:
 
     class Model(BaseModel):
-        data: QPointF
+        data: QPointF | None
 
     if expected:
         assert Model(data=data).data == expected
@@ -121,7 +127,7 @@ def test_qpointf(data: Any, expected: QtCore.QPointF | None) -> None:
 def test_qrect(data: Any, expected: QtCore.QRect | None) -> None:
 
     class Model(BaseModel):
-        data: QRect
+        data: QRect | None
 
     if expected:
         assert Model(data=data).data == expected
@@ -143,7 +149,7 @@ def test_qrect(data: Any, expected: QtCore.QRect | None) -> None:
 def test_qrectf(data: Any, expected: QtCore.QRectF | None) -> None:
 
     class Model(BaseModel):
-        data: QRectF
+        data: QRectF | None
 
     if expected:
         assert Model(data=data).data == expected
@@ -165,7 +171,7 @@ def test_qrectf(data: Any, expected: QtCore.QRectF | None) -> None:
 def test_qdate(data: Any, expected: QtCore.QDate | None) -> None:
 
     class Model(BaseModel):
-        data: QDate
+        data: QDate | None
 
     if expected:
         assert Model(data=data).data == expected
@@ -199,7 +205,7 @@ def test_qdate(data: Any, expected: QtCore.QDate | None) -> None:
 def test_qdatetime(data: Any, expected: QtCore.QDateTime | None) -> None:
 
     class Model(BaseModel):
-        data: QDateTime
+        data: QDateTime | None
 
     if expected:
         assert Model(data=data).data == expected
@@ -220,7 +226,7 @@ def test_qdatetime(data: Any, expected: QtCore.QDateTime | None) -> None:
 def test_qtime(data: Any, expected: QtCore.QTime | None) -> None:
 
     class Model(BaseModel):
-        data: QTime
+        data: QTime | None
 
     if expected:
         assert Model(data=data).data == expected
@@ -250,7 +256,7 @@ def test_qtime(data: Any, expected: QtCore.QTime | None) -> None:
 def test_quuid(data: Any, expected: QtCore.QUuid | None) -> None:
 
     class Model(BaseModel):
-        data: QUuid
+        data: QUuid | None
 
     if expected is None:
         with pytest.raises(ValidationError):
@@ -274,7 +280,7 @@ def test_quuid(data: Any, expected: QtCore.QUuid | None) -> None:
 def test_qcolor(data: Any, expected: QtGui.QColor | None) -> None:
 
     class Model(BaseModel):
-        data: QColor
+        data: QColor | None
 
     if expected:
         assert Model(data=data).data == expected
