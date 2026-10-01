@@ -1,5 +1,11 @@
 # qt-pydantic
 
+[![PyPI version](https://img.shields.io/pypi/v/qt-pydantic.svg)](https://pypi.org/project/qt-pydantic/)
+[![Python](https://img.shields.io/badge/python-3.9%2B-blue.svg)](https://pypi.org/project/qt-pydantic/)
+[![License](https://img.shields.io/pypi/l/qt-pydantic.svg)](https://github.com/beatreichenbach/qt-pydantic/blob/main/LICENSE)
+[![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
+[![ty](https://img.shields.io/badge/type%20checked-ty-261230.svg)](https://github.com/astral-sh/ty)
+
 The `qt-pydantic` package adds support for Qt types in Pydantic BaseModels.
 Using these annotations allows for easy serialization and deserialization of Qt types.
 
