@@ -3,10 +3,10 @@
 The `qt-pydantic` package adds support for Qt types in Pydantic BaseModels.
 Using these annotations allows for easy serialization and deserialization of Qt types.
 
-
 ## Installation
 
 Install using pip:
+
 ```shell
 pip install qt-pydantic
 ```
@@ -45,5 +45,4 @@ To contribute please refer to the [Contributing Guide](CONTRIBUTING.md).
 
 ## License
 
-MIT License. Copyright 2024 - Beat Reichenbach.
-See the [License file](LICENSE) for details.
+MIT License. Copyright 2026 - Beat Reichenbach. Seef the [License file](LICENSE) for details.
